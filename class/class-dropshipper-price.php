@@ -49,7 +49,6 @@ class Dropshipper_Price {
 
         // بررسی اعتبار قیمت‌ها
         if (!empty($dropship_price) && !empty($regular_price) && $regular_price <= $dropship_price) {
-            // اگر قیمت اصلی کمتر از قیمت دراپ‌شیپر باشد، خطا می‌دهیم
             wc_add_notice(__('Regular price must be greater than dropship price.', 'simple-plugin'), 'error');
             return;
         }
