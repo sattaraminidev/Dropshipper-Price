@@ -1,5 +1,4 @@
 <?php
-
 class Dropshipper_Price {
 
     // نمونه واحد از کلاس (Singleton)
@@ -15,7 +14,7 @@ class Dropshipper_Price {
     }
 
     // دسترسی به نمونه واحد افزونه
-    public static function get_instance(): Dropshipper_Price {
+    public static function get_instance() {
         if ( null === self::$instance ) {
             self::$instance = new self();
         }
