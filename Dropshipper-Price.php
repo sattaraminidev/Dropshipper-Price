@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // بارگذاری کلاس‌ها
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-dropshipper-price.php';
+require_once plugin_dir_path( __FILE__ ) . 'class/class-dropshipper-price.php';
 
 // فعال‌سازی افزونه
 function activate_dropshipper_price() {
