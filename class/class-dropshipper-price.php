@@ -6,11 +6,19 @@ class Dropshipper_Price {
 
     // جلوگیری از ایجاد نمونه جدید (Singleton Pattern)
     private function __construct() {
+        // بارگذاری ترجمه‌ها در هوک plugins_loaded
+        add_action('plugins_loaded', array($this, 'load_textdomain'));
+
         // افزودن اکشن‌ها
         add_action('woocommerce_product_options_general_product_data', array($this, 'add_custom_product_fields'));
         add_action('woocommerce_process_product_meta', array($this, 'save_custom_product_fields'));
         add_action('woocommerce_single_product_summary', array($this, 'display_dropship_profit'), 20);
         add_shortcode('dropship_prices', array($this, 'dropship_price_shortcode'));
+    }
+
+    // بارگذاری ترجمه‌ها
+    public function load_textdomain() {
+        load_plugin_textdomain('simple-plugin', false, plugin_dir_path(__FILE__) . 'languages');
     }
 
     // دسترسی به نمونه واحد افزونه
@@ -49,6 +57,7 @@ class Dropshipper_Price {
 
         // بررسی اعتبار قیمت‌ها
         if (!empty($dropship_price) && !empty($regular_price) && $regular_price <= $dropship_price) {
+            // اگر قیمت اصلی کمتر از قیمت دراپ‌شیپر باشد، خطا می‌دهیم
             wc_add_notice(__('Regular price must be greater than dropship price.', 'simple-plugin'), 'error');
             return;
         }
@@ -90,4 +99,5 @@ class Dropshipper_Price {
         }
     }
 }
+
 ?>
